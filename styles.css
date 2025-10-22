@@ -192,10 +192,22 @@ footer{ border-top:1px solid rgba(0,0,0,.06); padding: 2rem 0; background:#fff; 
   box-shadow: var(--shadow-sm);
 }
 
-/* Kontaktbereich: auf Mobile EINspaltig erzwingen */
-#kontakt .split { grid-template-columns: 1fr; }
+/* Kontaktbereich: mobil 1-spaltig, ab 900px 2-spaltig */
+#kontakt .split {
+  display: grid;
+  grid-template-columns: 1fr !important;   /* überschreibt evtl. inline-style */
+  gap: 2rem;
+}
+
+/* Abstand zwischen Textblock und Formular auf Mobile */
+#kontakt .form { margin-top: 1.25rem; }
+
 @media (min-width: 900px){
-  #kontakt .split { grid-template-columns: 1.05fr .95fr; }
+  #kontakt .split {
+    grid-template-columns: 1.05fr .95fr !important;  /* zwei Spalten ab 900px */
+    align-items: start;
+  }
+  #kontakt .form { margin-top: 0; }  /* oben kein Extraabstand mehr */
 }
 
 /* Bild-/Logo-Karte im Split responsiv begrenzen */
@@ -214,3 +226,4 @@ footer{ border-top:1px solid rgba(0,0,0,.06); padding: 2rem 0; background:#fff; 
 @media (max-width: 480px){
   .split .figure { width: min(360px, 100% - 2rem); }
 }
+
