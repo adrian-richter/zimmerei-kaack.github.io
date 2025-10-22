@@ -159,29 +159,27 @@ p.muted{ color: #222; opacity:.75; max-width: 70ch; }
   }
 }
 
-/* --- Mobile Navigation: mittig, nebeneinander, mit mehr Abstand --- */
+/* --- Mobile Navigation: zentriert, nebeneinander, mit mehr Höhe --- */
 @media (max-width: 900px) {
 
   .nav-inner {
-    justify-content: center;
+    justify-content: center;      
     align-items: center;
     text-align: center;
-    flex-direction: column;       /* alles mittig untereinander */
-    padding: 1rem 0 1.2rem;       /* mehr Höhe / Luft nach unten */
-    background: rgba(255,255,255,0.9);  /* leichter Hintergrund */
-    border-bottom-left-radius: var(--radius-xl);
-    border-bottom-right-radius: var(--radius-xl);
+    height: 64px;                          /* Höhe des Balkens */
+    background: rgba(255,255,255,0.9);     /* dezenter Hintergrund */
     box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   }
 
   .nav ul {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1.4rem;                   /* mehr Abstand zwischen Links */
-    margin-top: .4rem;             /* leicht nach unten versetzt */
+    justify-content: center;               /* horizontal zentrieren */
+    align-items: center;                   /* vertikal mittig */
+    gap: 1.5rem;                           /* Abstand zwischen Links */
+    margin: 0;
     padding: 0;
+    width: 100%;
   }
 
   .nav a {
@@ -190,12 +188,11 @@ p.muted{ color: #222; opacity:.75; max-width: 70ch; }
     color: var(--brand-dark);
   }
 
-  /* Optional: Logo ausblenden, wenn es überlappt */
+  /* Optional: Logo ausblenden, damit alles schön mittig bleibt */
   .brand {
     display: none;
   }
 }
-
 
 
   /* optional: Logo klein halten, damit nichts überlappt */
