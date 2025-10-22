@@ -192,3 +192,25 @@ footer{ border-top:1px solid rgba(0,0,0,.06); padding: 2rem 0; background:#fff; 
   box-shadow: var(--shadow-sm);
 }
 
+/* Kontaktbereich: auf Mobile EINspaltig erzwingen */
+#kontakt .split { grid-template-columns: 1fr; }
+@media (min-width: 900px){
+  #kontakt .split { grid-template-columns: 1.05fr .95fr; }
+}
+
+/* Bild-/Logo-Karte im Split responsiv begrenzen */
+.split .figure {
+  width: min(520px, 100%);
+  margin: 1rem auto 0;          /* mittig */
+}
+
+.split .figure img {
+  width: 100%;
+  height: auto;                  /* kein Hochskalieren */
+  display: block;
+}
+
+/* Auf sehr kleinen Screens noch kompakter */
+@media (max-width: 480px){
+  .split .figure { width: min(360px, 100% - 2rem); }
+}
