@@ -159,38 +159,43 @@ p.muted{ color: #222; opacity:.75; max-width: 70ch; }
   }
 }
 
-/* --- Mobile Navigation mittig und nebeneinander --- */
+/* --- Mobile Navigation: mittig, nebeneinander, mit mehr Abstand --- */
 @media (max-width: 900px) {
 
-  /* gesamte Leiste zentrieren */
   .nav-inner {
     justify-content: center;
     align-items: center;
     text-align: center;
+    flex-direction: column;       /* alles mittig untereinander */
+    padding: 1rem 0 1.2rem;       /* mehr Höhe / Luft nach unten */
+    background: rgba(255,255,255,0.9);  /* leichter Hintergrund */
+    border-bottom-left-radius: var(--radius-xl);
+    border-bottom-right-radius: var(--radius-xl);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   }
 
-  /* UL horizontal in der Mitte */
   .nav ul {
     display: flex;
     flex-direction: row;
-    justify-content: center;     /* mittig horizontal */
-    align-items: center;         /* vertikal mittig */
-    gap: 1.2rem;                 /* Abstand zwischen Links */
-    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4rem;                   /* mehr Abstand zwischen Links */
+    margin-top: .4rem;             /* leicht nach unten versetzt */
     padding: 0;
   }
 
-  /* einzelne Links */
   .nav a {
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 700;
+    color: var(--brand-dark);
   }
 
-  /* Logo optional ausblenden */
+  /* Optional: Logo ausblenden, wenn es überlappt */
   .brand {
     display: none;
   }
 }
+
 
 
   /* optional: Logo klein halten, damit nichts überlappt */
