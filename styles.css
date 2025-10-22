@@ -140,7 +140,43 @@ p.muted{ color: #222; opacity:.75; max-width: 70ch; }
 .card p  { margin: .25rem 0; color:#222; opacity:.8; font-size:.95rem; }
 .card small { display:block; margin-top:.5rem; color:#000; opacity:.55; font-style: italic; }
 
+/* --- Mobile Optimierung: Navigation + Footer mittig --- */
+@media (max-width: 900px) {
 
+  /* Navigation */
+  .nav-inner {
+    flex-direction: column;       /* Menü untereinander */
+    justify-content: center;      /* zentriert */
+    align-items: center;
+    text-align: center;
+    gap: .6rem;                   /* etwas Luft zwischen Links */
+    padding: .75rem 0;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  /* Marke/Logo in der Mitte */
+  .brand {
+    justify-content: center;
+  }
+
+  /* Footer */
+  footer .foot {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: .5rem;
+  }
+
+  footer {
+    text-align: center;
+  }
+}
 
 /* Intro */
 .split{ display:grid; gap: 2rem; align-items: center; }
