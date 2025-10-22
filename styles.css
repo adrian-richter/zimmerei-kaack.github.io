@@ -140,23 +140,6 @@ p.muted{ color: #222; opacity:.75; max-width: 70ch; }
 .card p  { margin: .25rem 0; color:#222; opacity:.8; font-size:.95rem; }
 .card small { display:block; margin-top:.5rem; color:#000; opacity:.55; font-style: italic; }
 
-/* --- Mobile Optimierung: Navigation + Footer mittig --- */
-@media (max-width: 900px) {
-
-  /* Navigation mittig nebeneinander */
-  .nav-inner {
-    justify-content: center;      /* gesamte Nav zentrieren */
-    align-items: center;
-    text-align: center;
-  }
-
-  .nav ul {
-    flex-direction: row;          /* Links nebeneinander */
-    justify-content: center;      /* zentriert */
-    align-items: center;
-    gap: 1rem;                    /* Abstand zwischen den Links */
-  }
-
   /* Marke/Logo bleibt zentriert */
   .brand {
     justify-content: center;
@@ -176,22 +159,39 @@ p.muted{ color: #222; opacity:.75; max-width: 70ch; }
   }
 }
 
-/* Mobile: Navigationslinks exakt mittig zentrieren */
-@media (max-width: 900px){
-  .nav-inner{
-    position: relative;          /* Anker für das absolute Zentrieren */
+/* --- Mobile Navigation mittig und nebeneinander --- */
+@media (max-width: 900px) {
+
+  /* gesamte Leiste zentrieren */
+  .nav-inner {
     justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 
-  .nav ul{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);  /* perfekt mittig in der Leiste */
-    flex-direction: row;                /* Links nebeneinander */
-    gap: 1rem;
-    margin: 0; padding: 0;
+  /* UL horizontal in der Mitte */
+  .nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;     /* mittig horizontal */
+    align-items: center;         /* vertikal mittig */
+    gap: 1.2rem;                 /* Abstand zwischen Links */
+    margin: 0 auto;
+    padding: 0;
   }
+
+  /* einzelne Links */
+  .nav a {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  /* Logo optional ausblenden */
+  .brand {
+    display: none;
+  }
+}
+
 
   /* optional: Logo klein halten, damit nichts überlappt */
   .brand-badge{ height: 32px; width: 32px; }
