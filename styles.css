@@ -143,28 +143,26 @@ p.muted{ color: #222; opacity:.75; max-width: 70ch; }
 /* --- Mobile Optimierung: Navigation + Footer mittig --- */
 @media (max-width: 900px) {
 
-  /* Navigation */
+  /* Navigation mittig nebeneinander */
   .nav-inner {
-    flex-direction: column;       /* Menü untereinander */
-    justify-content: center;      /* zentriert */
+    justify-content: center;      /* gesamte Nav zentrieren */
     align-items: center;
     text-align: center;
-    gap: .6rem;                   /* etwas Luft zwischen Links */
-    padding: .75rem 0;
   }
 
   .nav ul {
-    flex-direction: column;
+    flex-direction: row;          /* Links nebeneinander */
+    justify-content: center;      /* zentriert */
     align-items: center;
-    gap: .5rem;
+    gap: 1rem;                    /* Abstand zwischen den Links */
   }
 
-  /* Marke/Logo in der Mitte */
+  /* Marke/Logo bleibt zentriert */
   .brand {
     justify-content: center;
   }
 
-  /* Footer */
+  /* Footer mittig */
   footer .foot {
     flex-direction: column;
     justify-content: center;
@@ -177,6 +175,7 @@ p.muted{ color: #222; opacity:.75; max-width: 70ch; }
     text-align: center;
   }
 }
+
 
 /* Intro */
 .split{ display:grid; gap: 2rem; align-items: center; }
