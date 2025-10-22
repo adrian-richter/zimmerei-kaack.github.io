@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Impressum – Zimmerei Kaack</title>
+  <meta name="description" content="Impressum der Zimmerei Kaack, Geschäftsführer: Nils Schramm, Hermannstädter Straße 27c, 24610 Trappenkamp." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Seite ohne Video-Header: reduziertes Layout */
+    body{ background: #fff; }
+    .page-wrap{ min-height: 100dvh; display:flex; flex-direction:column; }
+    .logo-head{ padding: 3rem 1rem 1.5rem; text-align:center; }
+    .logo-head img{ width: 160px; height:auto; display:inline-block; filter: drop-shadow(0 6px 14px rgba(0,0,0,.08)); }
+    .content{ width:min(900px, 100% - 2rem); margin: 0 auto 3rem; }
+    .content h1{ font-size: clamp(1.6rem, 3vw, 2.2rem); margin: .5rem 0 1rem; color: var(--brand-dark); }
+    .content h2{ font-size: 1.15rem; margin: 1.6rem 0 .4rem; color: var(--brand-dark); }
+    .content p, .content li{ color:#222; opacity:.9; line-height:1.6; }
+    .muted a{ color: var(--brand-primary); font-weight: 700; }
+    .back{ text-align:center; margin: 2rem 0 0; }
+    .back a{ text-decoration:none; font-weight:700; color: var(--brand-primary); }
+    .legal-box{ background: var(--brand-light); border:1px solid rgba(0,0,0,.06); border-radius: var(--radius-xl); padding: 1rem 1.2rem; }
+    .pairs{ display:grid; grid-template-columns: 1fr; gap:.35rem; }
+    @media (min-width: 640px){ .pairs{ grid-template-columns: 220px 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <header class="logo-head">
+      <a href="/" title="Zur Startseite">
+        <img src="assets/kaacklogo.png" alt="Zimmerei Kaack Logo" />
+      </a>
+    </header>
+
+    <main class="content">
+      <h1>Impressum</h1>
+      <div class="legal-box">
+        <div class="pairs">
+          <strong>Anbieter nach § 5 TMG</strong>
+          <div>
+            Zimmerei Kaack<br>
+            Hermannstädter Straße 27c<br>
+            24610 Trappenkamp
+          </div>
+
+          <strong>Vertreten durch</strong>
+          <div>Geschäftsführer: Nils Schramm</div>
+
+          <strong>Kontakt</strong>
+          <div>
+            Telefon: <a href="tel:+4943232418">04323&nbsp;2418</a><br>
+            E‑Mail: <a href="mailto:info@zimmerei-kaack.de">info@zimmerei-kaack.de</a>
+          </div>
+
+          <strong>Umsatzsteuer-ID</strong>
+          <div>USt-IdNr.: <em>(falls vorhanden – bitte ergänzen)</em></div>
+
+          <strong>Berufsbezeichnung</strong>
+          <div>Zimmererbetrieb (Handwerksbetrieb)</div>
+
+          <strong>Zuständige Handwerkskammer</strong>
+          <div><em>(falls angeben gewünscht – z. B. Handwerkskammer Lübeck / Kiel – bitte ergänzen)</em></div>
+
+          <strong>Inhaltlich verantwortlich i. S. d. § 18 Abs. 2 MStV</strong>
+          <div>Nils Schramm, Anschrift wie oben</div>
+        </div>
+      </div>
+
+      <h2>Hinweise zur Haftung</h2>
+      <p>
+        Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+      </p>
+
+      <h2>Urheberrecht</h2>
+      <p>
+        Die auf dieser Website veröffentlichten Inhalte (Texte, Layout, Bilder) unterliegen dem deutschen Urheberrecht. Eine Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Rechteinhabers. Soweit Inhalte nicht von uns erstellt wurden, werden die Urheberrechte Dritter beachtet und Inhalte entsprechend gekennzeichnet.
+      </p>
+
+      <h2>Online-Streitbeilegung und Verbraucherschlichtung</h2>
+      <p>
+        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a>.
+        Wir sind nicht verpflichtet und grundsätzlich nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+      </p>
+
+      <div class="back">
+        <a href="/">← Zurück zur Startseite</a>
+      </div>
+    </main>
+
+    <footer class="content" style="margin-top:auto; opacity:.7;">
+      © <script>document.write(new Date().getFullYear())</script> Zimmerei Kaack – Alle Rechte vorbehalten
+    </footer>
+  </div>
+</body>
+</html>
