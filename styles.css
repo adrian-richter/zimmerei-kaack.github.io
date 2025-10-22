@@ -159,36 +159,45 @@ p.muted{ color: #222; opacity:.75; max-width: 70ch; }
   }
 }
 
-/* MOBILE: Nur die Link-Gruppe mittig platzieren – restlicher Look bleibt */
-@media (max-width: 900px){
-  .nav-inner{
-    position: relative;            /* Anker fürs absolute Zentrieren */
-    min-height: 64px;              /* etwas Höhe, damit's nicht gequetscht ist */
+/* --- Mobile Navigation mittig, nebeneinander, mit mehr Höhe --- */
+@media (max-width: 900px) {
+
+  /* gesamte Leiste zentrieren + dicker machen */
+  .nav-inner {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem 0 1.2rem;     /* mehr Höhe oben & unten */
+    margin-top: .5rem;          /* etwas Abstand vom oberen Rand */
+    background: rgba(255,255,255,0.9); /* dezenter heller Hintergrund */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-bottom-left-radius: var(--radius-xl);
+    border-bottom-right-radius: var(--radius-xl);
   }
-  .nav ul{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);  /* exakt mittig im Balken */
+
+  /* UL horizontal in der Mitte */
+  .nav ul {
     display: flex;
-    flex-direction: row !important;    /* sicher nebeneinander */
-    gap: 1rem;
-    margin: 0; padding: 0;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4rem;                /* etwas mehr Abstand zwischen Links */
+    margin: 0 auto;
+    padding: 0;
   }
-}
 
+  /* einzelne Links */
+  .nav a {
+    font-size: 1rem;
+    font-weight: 700;
+  }
 
-  /* Optional: Logo ausblenden, damit alles schön mittig bleibt */
+  /* Logo optional ausblenden */
   .brand {
     display: none;
   }
 }
 
-
-  /* optional: Logo klein halten, damit nichts überlappt */
-  .brand-badge{ height: 32px; width: 32px; }
-  .brand-title{ display:none; }  /* falls das Wort-Logo stört, ausblenden */
-}
 
 /* Intro */
 .split{ display:grid; gap: 2rem; align-items: center; }
