@@ -244,19 +244,18 @@ footer{ border-top:1px solid rgba(0,0,0,.06); padding: 2rem 0; background:#fff; 
   .split .figure { width: min(360px, 100% - 2rem); }
 }
 
-/* Mobile Navigation: mittig, nebeneinander, mit mehr Höhe (override) */
+/* --- MOBILE NAV: zentriert, ohne extra Balken/Radius/Shadow --- */
 @media (max-width: 900px){
-  /* Balken-Layout */
+
+  /* keine extra Bar, nur etwas vertikaler Abstand */
   .nav-inner{
-    display: flex;
-    justify-content: center !important;   /* horizontal zentriert */
-    align-items: center !important;       /* vertikal zentriert */
+    justify-content: center !important;
+    align-items: center !important;
     text-align: center;
-    padding: 1rem 0 1.25rem !important;   /* dickerer Balken + Links etwas tiefer */
-    background: rgba(255,255,255,0.92);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    border-bottom-left-radius: var(--radius-xl);
-    border-bottom-right-radius: var(--radius-xl);
+    padding: .9rem 0 1rem !important;   /* etwas „höher“, aber dezent */
+    background: transparent !important; /* KEIN weißer Balken */
+    box-shadow: none !important;        /* kein Schatten */
+    border-radius: 0 !important;        /* keine Rundung */
   }
 
   /* Linkliste: nebeneinander und mittig */
@@ -265,22 +264,17 @@ footer{ border-top:1px solid rgba(0,0,0,.06); padding: 2rem 0; background:#fff; 
     flex-direction: row !important;
     justify-content: center !important;
     align-items: center !important;
-    gap: 1.4rem;
+    gap: 1.2rem;
     margin: 0 auto !important;
     padding: 0 !important;
     list-style: none;
+    width: auto;                        /* verhindert Stretching an den Rand */
   }
 
-  /* Links */
-  .nav a{
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--brand-dark);
-    text-decoration: none;
-  }
-  .nav a:hover{ opacity: .75; }
-
-  /* Logo optional ausblenden, damit nichts nach rechts zieht */
+  /* Logo ausblenden, damit nichts zieht */
   .brand{ display: none !important; }
-}
 
+  /* Farben korrekt, je nach Zustand der Nav */
+  .nav.transparent a{ color:#fff !important; text-shadow: 0 1px 2px rgba(0,0,0,.25); }
+  .nav.solid a{ color: var(--brand-dark) !important; }
+}
