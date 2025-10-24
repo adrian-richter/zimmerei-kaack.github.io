@@ -113,19 +113,25 @@ display: none; /* via JS sichtbar, wenn kein Consent vorliegt */
   flex-wrap: wrap;
 }
 
-/* Gleich breite Buttons */
+/* Buttons nicht mehr stretchen */
 .cookie-card footer .btn {
-  flex: 1 1 130px;  /* beide gleich breit, mind. 130px */
+  flex: 0 0 auto;         /* nicht wachsen/schrumpfen */
+  min-width: 150px;       /* fixe Mindestbreite für Gleichheit */
   text-align: center;
+  padding: 12px 16px;
   font-weight: 600;
-  padding: 12px 0;
   border-radius: var(--radius);
   transition: background .2s, color .2s, transform .05s;
 }
 
-/* Optional: Maximalbreite begrenzen für große Screens */
-@media (min-width: 480px) {
+/* Auf sehr kleinen Screens dürfen sie umbrechen und schmaler werden */
+@media (max-width: 380px) {
+  .cookie-card footer {
+    justify-content: space-between;
+  }
   .cookie-card footer .btn {
-    flex: 0 0 150px; /* exakt gleiche Breite */
+    min-width: 46%;
+    padding: 12px 0;
   }
 }
+
