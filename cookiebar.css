@@ -85,3 +85,31 @@ input:disabled + .slider { background: #94a3b8; cursor: not-allowed; }
   .cookie-card footer .btn { flex: 1 1 100%; }
 }
 
+/* Footer optisch perfekt: gleicher Innenabstand auf beiden Seiten */
+.cookie-card footer {
+  padding: 16px 20px;               /* gleichmäßiger Innenabstand */
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 1px solid #eee;
+}
+
+/* Buttons sollen nie am Rand „kleben“ */
+.cookie-card footer .btn {
+  flex: 0 0 150px;                  /* gleiche Breite */
+  text-align: center;
+}
+
+/* Auf kleineren Bildschirmen sauber stapeln */
+@media (max-width: 420px) {
+  .cookie-card footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cookie-card footer .btn {
+    flex: 1 1 100%;
+  }
+}
+
+
