@@ -5,140 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Zimmerei Kaack – Meisterbetrieb für Holzbau</title>
   <meta name="description" content="Zimmerei Kaack – Dächer, Holzrahmenbau, Anbauten. Inhaber: Nils Schramm." />
-  <link rel="stylesheet" href="styles.css" />
-  <!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  	<link rel="stylesheet" href="styles.css">
+	<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+	<link rel="stylesheet" href="cookiebar.css">
 </head>
-	<link rel="stylesheet" href="cookiebar.css"><!-- Pfad ggf. anpassen -->
-<label class="switch" aria-label="Marketing erlauben">
-<input type="checkbox" id="toggleMarketing">
-<span class="slider"></span>
-</label>
-</div>
-</div>
-</div>
-<footer>
-<button class="btn" id="btnSavePrefs" type="button">Auswahl speichern</button>
-<button class="btn btn-reject" id="btnRejectAll" type="button">Alle ablehnen</button>
-<button class="btn btn-primary" id="btnAcceptAll" type="button">Alle akzeptieren</button>
-</footer>
-</div>
-</div>
 
-
-<script>
-(function(){
-const STORAGE_KEY = 'cookieConsent.v1';
-
-
-const $banner = document.getElementById('cookieBanner');
-const $modal = document.getElementById('cookieModal');
-const $backdrop = document.getElementById('cookieBackdrop');
-
-
-const $btnOpen = document.getElementById('btnCookieSettings');
-const $btnAcc = document.getElementById('btnCookieAccept');
-const $btnRej = document.getElementById('btnCookieReject');
-
-
-const $tglAna = document.getElementById('toggleAnalytics');
-const $tglMkt = document.getElementById('toggleMarketing');
-
-
-const $btnSave = document.getElementById('btnSavePrefs');
-const $btnAccAll= document.getElementById('btnAcceptAll');
-const $btnRejAll= document.getElementById('btnRejectAll');
-
-
-// Public API: window.CONSENT.has('analytics'|'marketing')
-window.CONSENT = {
-get(){
-try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || null; }
-catch(e){ return null; }
-},
-has(scope){
-const c = this.get();
-return !!(c && c[scope] === true);
-}
-};
-
-
-function showBanner(){ $banner.style.display = 'block'; }
-function hideBanner(){ $banner.style.display = 'none'; }
-
-
-function openModal(){
-const c = window.CONSENT.get() || { analytics:false, marketing:false };
-$tglAna.checked = !!c.analytics;
-$tglMkt.checked = !!c.marketing;
-$backdrop.style.display = 'block';
-$modal.style.display = 'grid';
-$modal.setAttribute('aria-hidden','false');
-}
-function closeModal(){
-$backdrop.style.display = 'none';
-$modal.style.display = 'none';
-$modal.setAttribute('aria-hidden','true');
-}
-
-
-function saveConsent(consent){
-const payload = {
-analytics: !!consent.analytics,
-marketing: !!consent.marketing,
-timestamp: Date.now(),
-version: 'v1'
-};
-localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-document.documentElement.dataset.consent = JSON.stringify(payload);
-
-
-if (window.dataLayer) {
-window.dataLayer.push({ event: 'consent_update', consent: payload });
-}
-
-
-activateDeferredScripts(payload);
-}
-
-
-function activateDeferredScripts(consent){
-const nodes = document.querySelectorAll('script[type="text/plain"][data-consent]');
-nodes.forEach(function(node){
-const need = node.getAttribute('data-consent');
-if (!need) return;
-if (consent[need] !== true) return;
-const s = document.createElement('script');
-[...node.attributes].forEach(a=>{ if (a.name !== 'type') s.setAttribute(a.name, a.value); });
-s.type = 'text/javascript';
-if (node.textContent) s.text = node.textContent;
-node.replaceWith(s);
-});
-}
-
-
-const existing = window.CONSENT.get();
-if (existing) {
-hideBanner();
-activateDeferredScripts(existing);
-} else {
-showBanner();
-}
-
-
-$btnOpen.addEventListener('click', openModal);
-$btnAcc.addEventListener('click', function(){ saveConsent({ analytics:true, marketing:true }); hideBanner(); });
-$btnRej.addEventListener('click', function(){ saveConsent({ analytics:false, marketing:false }); hideBanner(); });
-
-
-$btnSave.addEventListener('click', function(){ saveConsent({ analytics:$tglAna.checked, marketing:$tglMkt.checked }); hideBanner(); closeModal(); });
-$btnAccAll.addEventListener('click', function(){ saveConsent({ analytics:true, marketing:true }); hideBanner(); closeModal(); });
-$btnRejAll.addEventListener('click', function(){ saveConsent({ analytics:false, marketing:false }); hideBanner(); closeModal(); });
-
-
-$backdrop.addEventListener('click', closeModal);
-})();
-</script>
 <body>
   <!-- NAV -->
   <header id="nav" class="nav transparent">
@@ -382,6 +253,70 @@ $backdrop.addEventListener('click', closeModal);
     </div>
   </footer>
 
+	<!-- COOKIE BAR -->
+<div class="cookie-banner" role="region" aria-label="Cookie-Hinweis" id="cookieBanner">
+  <div class="cookie-inner">
+    <p class="cookie-text">
+      Diese Website verwendet Cookies, um ein verbessertes Nutzererlebnis zu bieten. Per Klick auf „Zustimmen“ erlaube ich die Nutzung nicht-essentieller Cookies.
+      <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>
+    </p>
+    <div class="cookie-actions" role="group" aria-label="Cookie-Aktionen">
+      <button class="btn btn-settings" id="btnCookieSettings" type="button">Einstellungen</button>
+      <button class="btn btn-reject" id="btnCookieReject" type="button">Alle ablehnen</button>
+      <button class="btn btn-primary" id="btnCookieAccept" type="button">Zustimmen</button>
+    </div>
+  </div>
+</div>
+
+<div class="cookie-modal-backdrop" id="cookieBackdrop" aria-hidden="true"></div>
+<div class="cookie-modal" id="cookieModal" role="dialog" aria-modal="true" aria-labelledby="cookieModalTitle" aria-hidden="true">
+  <div class="cookie-card">
+    <header><h3 id="cookieModalTitle">Datenschutzeinstellungen</h3></header>
+    <div class="body">
+      <div class="cookie-cat">
+        <div class="row">
+          <div>
+            <h4>Essentiell</h4>
+            <small>Erforderlich, damit die Website funktioniert. Nicht deaktivierbar.</small>
+          </div>
+          <label class="switch" aria-label="Essentielle Cookies">
+            <input type="checkbox" checked disabled><span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="cookie-cat">
+        <div class="row">
+          <div>
+            <h4>Analytics</h4>
+            <small>Anonyme Nutzungsstatistiken.</small>
+          </div>
+          <label class="switch" aria-label="Analytics erlauben">
+            <input type="checkbox" id="toggleAnalytics"><span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="cookie-cat">
+        <div class="row">
+          <div>
+            <h4>Marketing</h4>
+            <small>Drittanbieter-Inhalte (z. B. YouTube, Maps).</small>
+          </div>
+          <label class="switch" aria-label="Marketing erlauben">
+            <input type="checkbox" id="toggleMarketing"><span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <button class="btn" id="btnSavePrefs" type="button">Auswahl speichern</button>
+      <button class="btn btn-reject" id="btnRejectAll" type="button">Alle ablehnen</button>
+      <button class="btn btn-primary" id="btnAcceptAll" type="button">Alle akzeptieren</button>
+    </footer>
+  </div>
+</div>
+
   <!-- E-Mail -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -399,6 +334,118 @@ $backdrop.addEventListener('click', closeModal);
     }
     window.addEventListener('scroll', updateNav, { passive: true });
     updateNav();
+
+	  (function(){
+const STORAGE_KEY = 'cookieConsent.v1';
+
+
+const $banner = document.getElementById('cookieBanner');
+const $modal = document.getElementById('cookieModal');
+const $backdrop = document.getElementById('cookieBackdrop');
+
+
+const $btnOpen = document.getElementById('btnCookieSettings');
+const $btnAcc = document.getElementById('btnCookieAccept');
+const $btnRej = document.getElementById('btnCookieReject');
+
+
+const $tglAna = document.getElementById('toggleAnalytics');
+const $tglMkt = document.getElementById('toggleMarketing');
+
+
+const $btnSave = document.getElementById('btnSavePrefs');
+const $btnAccAll= document.getElementById('btnAcceptAll');
+const $btnRejAll= document.getElementById('btnRejectAll');
+
+
+// Public API: window.CONSENT.has('analytics'|'marketing')
+window.CONSENT = {
+get(){
+try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || null; }
+catch(e){ return null; }
+},
+has(scope){
+const c = this.get();
+return !!(c && c[scope] === true);
+}
+};
+
+
+function showBanner(){ $banner.style.display = 'block'; }
+function hideBanner(){ $banner.style.display = 'none'; }
+
+
+function openModal(){
+const c = window.CONSENT.get() || { analytics:false, marketing:false };
+$tglAna.checked = !!c.analytics;
+$tglMkt.checked = !!c.marketing;
+$backdrop.style.display = 'block';
+$modal.style.display = 'grid';
+$modal.setAttribute('aria-hidden','false');
+}
+function closeModal(){
+$backdrop.style.display = 'none';
+$modal.style.display = 'none';
+$modal.setAttribute('aria-hidden','true');
+}
+
+
+function saveConsent(consent){
+const payload = {
+analytics: !!consent.analytics,
+marketing: !!consent.marketing,
+timestamp: Date.now(),
+version: 'v1'
+};
+localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+document.documentElement.dataset.consent = JSON.stringify(payload);
+
+
+if (window.dataLayer) {
+window.dataLayer.push({ event: 'consent_update', consent: payload });
+}
+
+
+activateDeferredScripts(payload);
+}
+
+
+function activateDeferredScripts(consent){
+const nodes = document.querySelectorAll('script[type="text/plain"][data-consent]');
+nodes.forEach(function(node){
+const need = node.getAttribute('data-consent');
+if (!need) return;
+if (consent[need] !== true) return;
+const s = document.createElement('script');
+[...node.attributes].forEach(a=>{ if (a.name !== 'type') s.setAttribute(a.name, a.value); });
+s.type = 'text/javascript';
+if (node.textContent) s.text = node.textContent;
+node.replaceWith(s);
+});
+}
+
+
+const existing = window.CONSENT.get();
+if (existing) {
+hideBanner();
+activateDeferredScripts(existing);
+} else {
+showBanner();
+}
+
+
+$btnOpen.addEventListener('click', openModal);
+$btnAcc.addEventListener('click', function(){ saveConsent({ analytics:true, marketing:true }); hideBanner(); });
+$btnRej.addEventListener('click', function(){ saveConsent({ analytics:false, marketing:false }); hideBanner(); });
+
+
+$btnSave.addEventListener('click', function(){ saveConsent({ analytics:$tglAna.checked, marketing:$tglMkt.checked }); hideBanner(); closeModal(); });
+$btnAccAll.addEventListener('click', function(){ saveConsent({ analytics:true, marketing:true }); hideBanner(); closeModal(); });
+$btnRejAll.addEventListener('click', function(){ saveConsent({ analytics:false, marketing:false }); hideBanner(); closeModal(); });
+
+
+$backdrop.addEventListener('click', closeModal);
+})();
   </script>
 </body>
 </html>
