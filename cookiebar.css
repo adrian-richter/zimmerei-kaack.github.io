@@ -134,4 +134,49 @@ display: none; /* via JS sichtbar, wenn kein Consent vorliegt */
     padding: 12px 0;
   }
 }
+/* bessere Safe-Area am iPhone etc. */
+.cookie-banner {
+  padding-bottom: calc(14px + env(safe-area-inset-bottom));
+}
+
+/* Buttons dürfen umbrechen */
+.cookie-actions { 
+  display: flex; 
+  gap: 10px; 
+  flex-wrap: wrap; 
+  justify-content: flex-start;
+}
+
+/* Desktop: wie gehabt */
+.cookie-actions .btn { 
+  white-space: nowrap; 
+}
+
+/* <= 640px: 2 Spalten + 1 volle Zeile (3 Buttons passen so immer rein) */
+@media (max-width: 640px) {
+  .cookie-inner {
+    grid-template-columns: 1fr;       /* Text oben, Buttons darunter */
+  }
+  .cookie-text { 
+    font-size: 13px; 
+    line-height: 1.45; 
+  }
+  .cookie-actions { 
+    gap: 8px; 
+  }
+  .cookie-actions .btn { 
+    flex: 1 1 48%;                     /* zwei pro Zeile */
+    min-width: 0;
+  }
+  .cookie-actions .btn:nth-child(3) { 
+    flex-basis: 100%;                  /* der dritte (Zustimmen) volle Breite */
+  }
+}
+
+/* <= 420px: alle drei untereinander, volle Breite – null Risiko */
+@media (max-width: 420px) {
+  .cookie-actions .btn {
+    flex: 1 1 100%;
+  }
+}
 
