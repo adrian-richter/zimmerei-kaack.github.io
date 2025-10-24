@@ -46,137 +46,17 @@ display: none; /* via JS sichtbar, wenn kein Consent vorliegt */
 .cookie-cat .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 
 
-/* Einheitliche, kleinere Switches */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 40px;   /* vorher 48px */
-  height: 22px;  /* vorher 26px */
-}
+.switch { position: relative; display: inline-block; width: 48px; height: 26px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; inset: 0; background: #d0d5dd; transition: .2s; border-radius: 999px; }
+.slider:before { content: ""; position: absolute; height: 22px; width: 22px; left: 2px; top: 2px; background: #fff; transition: .2s; border-radius: 50%; }
+input:checked + .slider { background: var(--brand-primary); }
+input:checked + .slider:before { transform: translateX(22px); }
+input:disabled + .slider { background: #94a3b8; cursor: not-allowed; }
+.cookie-card footer { padding: 16px 20px; display: flex; gap: 10px; justify-content: flex-end; border-top: 1px solid #eee; }
 
-.switch input {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  opacity: 0;                 /* unsichtbar, aber klickbar */
-  cursor: pointer;
-  -webkit-appearance: none;   /* iOS Safari */
-  -moz-appearance: none;
-  appearance: none;
-}
 
-.slider {
-  position: absolute;
-  inset: 0;
-  background: #d0d5dd;
-  border-radius: 999px;
-  transition: background .2s;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.05);
+@media (max-width: 720px) {
+.cookie-inner { grid-template-columns: 1fr; }
+.cookie-actions { justify-content: flex-start; flex-wrap: wrap; }
 }
-
-.slider:before {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 18px;   /* vorher 22px */
-  height: 18px;  /* vorher 22px */
-  background: #fff;
-  border-radius: 50%;
-  transition: transform .2s;
-  box-shadow: 0 1px 2px rgba(0,0,0,.25);
-}
-
-.switch input:checked + .slider {
-  background: var(--brand-primary);
-}
-
-.switch input:checked + .slider:before {
-  transform: translateX(18px); /* 40px - 18px - 2*2px = 18px */
-}
-
-/* deaktiviert-Style bleibt gleich */
-.switch input:disabled + .slider {
-  background: #94a3b8;
-  cursor: not-allowed;
-}
-
-.cookie-card footer {
-  padding: 16px 20px;
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-  align-items: center;
-  border-top: 1px solid #eee;
-  flex-wrap: wrap;
-}
-
-/* Buttons nicht mehr stretchen */
-.cookie-card footer .btn {
-  flex: 0 0 auto;         /* nicht wachsen/schrumpfen */
-  min-width: 150px;       /* fixe Mindestbreite für Gleichheit */
-  text-align: center;
-  padding: 12px 16px;
-  font-weight: 600;
-  border-radius: var(--radius);
-  transition: background .2s, color .2s, transform .05s;
-}
-
-/* Auf sehr kleinen Screens dürfen sie umbrechen und schmaler werden */
-@media (max-width: 380px) {
-  .cookie-card footer {
-    justify-content: space-between;
-  }
-  .cookie-card footer .btn {
-    min-width: 46%;
-    padding: 12px 0;
-  }
-}
-/* bessere Safe-Area am iPhone etc. */
-.cookie-banner {
-  padding-bottom: calc(14px + env(safe-area-inset-bottom));
-}
-
-/* Buttons dürfen umbrechen */
-.cookie-actions { 
-  display: flex; 
-  gap: 10px; 
-  flex-wrap: wrap; 
-  justify-content: flex-start;
-}
-
-/* Desktop: wie gehabt */
-.cookie-actions .btn { 
-  white-space: nowrap; 
-}
-
-/* <= 640px: 2 Spalten + 1 volle Zeile (3 Buttons passen so immer rein) */
-@media (max-width: 640px) {
-  .cookie-inner {
-    grid-template-columns: 1fr;       /* Text oben, Buttons darunter */
-  }
-  .cookie-text { 
-    font-size: 13px; 
-    line-height: 1.45; 
-  }
-  .cookie-actions { 
-    gap: 8px; 
-  }
-  .cookie-actions .btn { 
-    flex: 1 1 48%;                     /* zwei pro Zeile */
-    min-width: 0;
-  }
-  .cookie-actions .btn:nth-child(3) { 
-    flex-basis: 100%;                  /* der dritte (Zustimmen) volle Breite */
-  }
-}
-
-/* <= 420px: alle drei untereinander, volle Breite – null Risiko */
-@media (max-width: 420px) {
-  .cookie-actions .btn {
-    flex: 1 1 100%;
-  }
-}
-
