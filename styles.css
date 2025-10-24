@@ -159,54 +159,6 @@ p.muted{ color: #222; opacity:.75; max-width: 70ch; }
   }
 }
 
-/* --- Mobile Navigation zentriert, nebeneinander, mit mehr Höhe --- */
-@media (max-width: 900px) {
-
-  /* Grundlayout der Nav-Bar */
-  .nav-inner {
-    display: flex;
-    justify-content: center;     /* horizontal zentriert */
-    align-items: center;         /* vertikal zentriert */
-    text-align: center;
-    padding: 1.2rem 0;           /* etwas höherer Balken */
-    background: rgba(255,255,255,0.92);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    border-bottom-left-radius: var(--radius-xl);
-    border-bottom-right-radius: var(--radius-xl);
-    position: relative;
-  }
-
-  /* UL horizontal in der Mitte */
-  .nav ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;                 /* Abstand zwischen den Links */
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  /* Link-Styling */
-  .nav a {
-    color: var(--brand-dark);
-    font-size: 1rem;
-    font-weight: 700;
-    text-decoration: none;
-  }
-  .nav a:hover {
-    opacity: 0.75;
-  }
-
-  /* Logo ausblenden, damit nix verschiebt */
-  .brand {
-    display: none;
-  }
-}
-
-
-
 /* Intro */
 .split{ display:grid; gap: 2rem; align-items: center; }
 @media (min-width: 900px){ .split{ grid-template-columns: 1.05fr .95fr; } }
@@ -290,5 +242,45 @@ footer{ border-top:1px solid rgba(0,0,0,.06); padding: 2rem 0; background:#fff; 
 /* Auf sehr kleinen Screens noch kompakter */
 @media (max-width: 480px){
   .split .figure { width: min(360px, 100% - 2rem); }
+}
+
+/* Mobile Navigation: mittig, nebeneinander, mit mehr Höhe (override) */
+@media (max-width: 900px){
+  /* Balken-Layout */
+  .nav-inner{
+    display: flex;
+    justify-content: center !important;   /* horizontal zentriert */
+    align-items: center !important;       /* vertikal zentriert */
+    text-align: center;
+    padding: 1rem 0 1.25rem !important;   /* dickerer Balken + Links etwas tiefer */
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border-bottom-left-radius: var(--radius-xl);
+    border-bottom-right-radius: var(--radius-xl);
+  }
+
+  /* Linkliste: nebeneinander und mittig */
+  .nav ul{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 1.4rem;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    list-style: none;
+  }
+
+  /* Links */
+  .nav a{
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--brand-dark);
+    text-decoration: none;
+  }
+  .nav a:hover{ opacity: .75; }
+
+  /* Logo optional ausblenden, damit nichts nach rechts zieht */
+  .brand{ display: none !important; }
 }
 
