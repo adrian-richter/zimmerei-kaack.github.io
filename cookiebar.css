@@ -60,3 +60,28 @@ input:disabled + .slider { background: #94a3b8; cursor: not-allowed; }
 .cookie-inner { grid-template-columns: 1fr; }
 .cookie-actions { justify-content: flex-start; flex-wrap: wrap; }
 }
+
+/* === Fix 1: Switches immer gleich groß (nicht vom Text beeinflusst) === */
+.cookie-cat .row { align-items: center; }    /* zentriert Schalter vertikal */
+.switch {
+  width: 48px;
+  height: 26px;
+  flex: 0 0 48px;      /* lässt den Switch im Flex-Layout NICHT wachsen */
+  font-size: 0;        /* verhindert Text-Einflüsse auf die Höhe */
+  line-height: 0;
+}
+.switch input { position: absolute; inset: 0; margin: 0; }
+
+/* === Fix 2: Footer-Buttons gleich breit & nebeneinander === */
+.cookie-card footer { justify-content: flex-end; gap: 10px; }
+.cookie-card footer .btn {
+  min-width: 150px;    /* gleiche Breite für „Speichern“ & „Alle akzeptieren“ */
+  text-align: center;
+}
+
+/* Optional: auf sehr kleinen Geräten dürfen sie umbrechen (komfortabler) */
+@media (max-width: 420px) {
+  .cookie-card footer { justify-content: stretch; }
+  .cookie-card footer .btn { flex: 1 1 100%; }
+}
+
