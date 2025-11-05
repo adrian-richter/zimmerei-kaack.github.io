@@ -200,31 +200,14 @@
 <form class="form" id="contact-form"
       action="https://formsubmit.co/info@zimmerei-kaack.de"
       method="POST" novalidate>
-
-  <!-- FormSubmit -->
-  <input type="hidden" name="_next" value="https://zimmerei-kaack.de/danke.html">
-  <input type="hidden" name="_subject" value="Neue Anfrage über zimmerei-kaack.de">
-  <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_captcha" value="false"><!-- wir nutzen eigenes Captcha -->
-
-  <!-- Honeypot -->
-  <input type="text" name="website" tabindex="-1" autocomplete="off"
-         style="position:absolute; left:-9999px; opacity:0; width:1px; height:1px; overflow:hidden;">
-
-  <!-- Zeitbremse -->
-  <input type="hidden" name="_ts" id="form-ts">
-
-  <!-- Captcha erwarteter Wert -->
-  <input type="hidden" id="captcha-expected" value="">
-
   <div class="row two">
     <label>
       <span>Name</span>
-      <input type="text" name="name" placeholder="Ihr Name" required>
+      <input type="text" name="name" placeholder="Ihr Name" required />
     </label>
     <label>
       <span>E-Mail</span>
-      <input type="email" name="email" placeholder="name@mail.de" required>
+      <input type="email" name="email" placeholder="name@mail.de" required />
     </label>
   </div>
 
@@ -233,33 +216,29 @@
     <textarea name="message" placeholder="Worum geht es?" required></textarea>
   </label>
 
-  <!-- Captcha -->
-  <label class="captcha-block" style="display:block;">
-    <span style="display:block;margin-bottom:.35rem;">Anti-Spam:</span>
-    <div class="captcha-row" style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;">
-      <span id="cap-a" class="cap-badge">?</span>
-      <span id="cap-op" class="cap-badge">?</span>
-      <span id="cap-b" class="cap-badge">?</span>
-      <span class="cap-badge">=</span>
-      <input type="number" id="captcha-answer" inputmode="numeric" placeholder="Ergebnis" required style="max-width:160px;">
-      <button type="button" id="captcha-refresh" class="btn"
-              style="border:1px solid rgba(0,0,0,.12); background:#fff;">Neu</button>
-    </div>
-  </label>
-
   <!-- DSGVO -->
   <label style="display:flex; gap:.5rem; align-items:center; font-size:.9rem;">
-    <input type="checkbox" name="privacy" required>
+    <input type="checkbox" name="privacy" required />
     <span>Ich stimme zu, dass meine Angaben zur Kontaktaufnahme gespeichert werden.</span>
   </label>
 
-  <button class="btn" style="background:var(--brand-accent); color:#fff; box-shadow:var(--shadow-sm)" type="submit">
+  <!-- Honeypot (Spamschutz) -->
+  <input type="text" name="website" tabindex="-1" autocomplete="off"
+         style="position:absolute; left:-10000px;" />
+
+  <!-- Optional: Betreff -->
+  <input type="hidden" name="_subject" value="Neue Anfrage über zimmerei-kaack.de" />
+
+    <input type="hidden" name="_next" value="https://zimmerei-kaack.de/danke.html">
+  <button class="btn" style="background:var(--brand-accent); color:#fff; box-shadow: var(--shadow-sm)" type="submit">
     Senden
   </button>
 
-  <div class="note">Hinweis: Wir melden uns schnellstmöglich.</div>
-</form>
+  <div class="note" id="form-note">Hinweis: Wir melden uns schnellstmöglich.</div>
 
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="table">
+</form>
 
       </div>
     </div>
@@ -471,75 +450,6 @@ $btnRejAll.addEventListener('click', function(){ saveConsent({ analytics:false, 
 $backdrop.addEventListener('click', closeModal);
 })();
 
-
-<script>
-(function(){
-  var form = document.getElementById('contact-form');
-  if(!form) return;
-
-  // Zeitbremse
-  var ts = document.getElementById('form-ts');
-  var start = Date.now();
-  if(ts) ts.value = String(start);
-
-  // Captcha-Elemente
-  var aEl = document.getElementById('cap-a');
-  var bEl = document.getElementById('cap-b');
-  var opEl = document.getElementById('cap-op');
-  var ans = document.getElementById('captcha-answer');
-  var refresh = document.getElementById('captcha-refresh');
-  var expectedInput = document.getElementById('captcha-expected');
-  var hp = form.querySelector('input[name="website"]');
-
-  function r(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
-
-  function buildCaptcha(){
-    var ops = ['+','-','*'];              // nur ASCII
-    var a = r(1,9), b = r(1,9);
-    var op = ops[r(0, ops.length-1)];
-    var res;
-
-    if(op === '-'){ if(b>a){ var t=a; a=b; b=t; } res = a - b; }
-    else if(op === '*'){ res = a * b; }
-    else { res = a + b; }
-
-    // Sichtbar setzen
-    if(aEl) aEl.textContent = String(a);
-    if(bEl) bEl.textContent = String(b);
-    if(opEl) opEl.textContent = op;
-
-    // Erwarteten Wert im Hidden-Input speichern (robuster als dataset)
-    if(expectedInput) expectedInput.value = String(res);
-
-    if(ans) ans.value = '';
-  }
-
-  // Initial + Refresh
-  buildCaptcha();
-  if(refresh) refresh.addEventListener('click', buildCaptcha);
-
-  form.addEventListener('submit', function(e){
-    // Honeypot
-    if(hp && hp.value.trim() !== ''){
-      e.preventDefault();
-      return;
-    }
-    // kurze Lesezeit
-    if(Date.now() - start < 1500){
-      e.preventDefault();
-      alert('Bitte kurz warten und erneut senden.');
-      return;
-    }
-    // Captcha prüfen
-    var exp = expectedInput ? expectedInput.value : '';
-    if(!ans || (ans.value||'').trim() !== exp){
-      e.preventDefault();
-      alert('Anti-Spam: Bitte die Rechenaufgabe korrekt lösen.');
-      if(ans) ans.focus();
-      return;
-    }
-  });
-})();
   </script>
 </body>
 </html>
