@@ -195,6 +195,8 @@
           </div>
         </div>
 
+		  <!-- FORMULAR -->
+
 <form class="form" id="contact-form"
       action="https://formsubmit.co/info@zimmerei-kaack.de"
       method="POST" novalidate>
@@ -203,7 +205,7 @@
   <input type="hidden" name="_next" value="https://zimmerei-kaack.de/danke.html">
   <input type="hidden" name="_subject" value="Neue Anfrage über zimmerei-kaack.de">
   <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_captcha" value="false"><!-- wir nutzen eigenes Captcha -->
+  <input type="hidden" name="_captcha" value="false"><!-- eigenes Captcha -->
 
   <!-- Honeypot (unsichtbar) -->
   <input type="text" name="website" tabindex="-1" autocomplete="off"
@@ -228,10 +230,11 @@
     <textarea name="message" placeholder="Worum geht es?" required></textarea>
   </label>
 
-  <!-- DYNAMISCHES CAPTCHA -->
-  <label>
-    <span id="captcha-question" style="display:block;margin-bottom:.35rem;">Anti-Spam: …</span>
-    <div style="display:flex; gap:.5rem; align-items:center;">
+  <!-- DYNAMISCHES CAPTCHA (sichtbare Aufgabe) -->
+  <label class="captcha-block" style="display:block;">
+    <span class="captcha-label" style="display:block;margin-bottom:.35rem;">Anti-Spam:</span>
+    <div class="captcha-row" style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;">
+      <strong id="captcha-question" style="font-weight:800; font-size:1rem;">–</strong>
       <input type="number" id="captcha-answer" inputmode="numeric" placeholder="Ergebnis" required style="max-width:160px;">
       <button type="button" id="captcha-refresh" class="btn" style="border:1px solid rgba(0,0,0,.12); background:#fff;">Neu</button>
     </div>
@@ -249,6 +252,7 @@
 
   <div class="note" id="form-note">Hinweis: Wir melden uns schnellstmöglich.</div>
 </form>
+
       </div>
     </div>
   </section>
@@ -459,11 +463,12 @@ $btnRejAll.addEventListener('click', function(){ saveConsent({ analytics:false, 
 $backdrop.addEventListener('click', closeModal);
 })();
 
-(function(){
+
+document.addEventListener('DOMContentLoaded', function(){
   const form = document.getElementById('contact-form');
   if(!form) return;
 
-  // Zeitstempel (kleine Bot-Bremse)
+  // Zeitstempel setzen (kleine Bot-Bremse)
   const ts = document.getElementById('form-ts');
   const start = Date.now();
   if(ts) ts.value = String(start);
@@ -476,27 +481,34 @@ $backdrop.addEventListener('click', closeModal);
 
   function rand(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
   function newCaptcha(){
-    const ops = ['+','−','×'];
-    let a = rand(1,9), b = rand(1,9), op = ops[rand(0, ops.length-1)], res;
-    if(op === '−'){ if(b>a) [a,b] = [b,a]; res = a - b; }
-    else if(op === '×'){ res = a * b; }
+    // Nur ASCII-Operatoren verwenden: +, -, *
+    const ops = ['+','-','*'];
+    let a = rand(1, 9);
+    let b = rand(1, 9);
+    const op = ops[rand(0, ops.length-1)];
+    let res;
+
+    if(op === '-'){ if(b > a) { const t = a; a = b; b = t; } res = a - b; }
+    else if(op === '*'){ res = a * b; }
     else { res = a + b; }
-    qEl.textContent = `Anti-Spam: Wieviel ist ${a} ${op} ${b}?`;
-    form.dataset.expected = String(res);   // erwartetes Ergebnis merken
-    aEl.value = '';
+
+    // Klare, sichtbare Aufgabe wie "8 - 3"
+    qEl.textContent = `${a} ${op} ${b}`;
+    form.dataset.expected = String(res);
+    if(aEl) aEl.value = '';
   }
 
   newCaptcha();
-  refreshBtn && refreshBtn.addEventListener('click', newCaptcha);
+  if(refreshBtn) refreshBtn.addEventListener('click', newCaptcha);
 
   form.addEventListener('submit', function(e){
-    // Honeypot gefüllt? → Bot
+    // Honeypot → Bot
     if(hp && hp.value.trim() !== ''){
       e.preventDefault();
       return;
     }
-    // minimale „Lesezeit“ 2s
-    if(Date.now() - start < 2000){
+    // kurze Lesezeit
+    if(Date.now() - start < 1500){
       e.preventDefault();
       alert('Bitte einen kurzen Moment warten und dann erneut senden.');
       return;
@@ -506,11 +518,11 @@ $backdrop.addEventListener('click', closeModal);
     if((aEl.value || '').trim() !== expected){
       e.preventDefault();
       alert('Anti-Spam: Bitte die Rechenaufgabe korrekt lösen.');
-      aEl && aEl.focus();
+      if(aEl) aEl.focus();
       return;
     }
   });
-})();
+});
   </script>
 </body>
 </html>
