@@ -317,3 +317,14 @@ footer{ border-top:1px solid rgba(0,0,0,.06); padding: 2rem 0; background:#fff; 
   .nav.solid a{ color: var(--brand-dark) !important; }
 }
 
+.cap-badge{
+  display:inline-block;
+  min-width: 2.1ch;
+  padding:.25rem .5rem;
+  border-radius: .5rem;
+  background: var(--brand-light);
+  border:1px solid rgba(0,0,0,.08);
+  font-weight: 800;
+  text-align:center;
+}
+
