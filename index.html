@@ -458,6 +458,59 @@ $btnRejAll.addEventListener('click', function(){ saveConsent({ analytics:false, 
 
 $backdrop.addEventListener('click', closeModal);
 })();
+
+(function(){
+  const form = document.getElementById('contact-form');
+  if(!form) return;
+
+  // Zeitstempel (kleine Bot-Bremse)
+  const ts = document.getElementById('form-ts');
+  const start = Date.now();
+  if(ts) ts.value = String(start);
+
+  // Elemente
+  const qEl = document.getElementById('captcha-question');
+  const aEl = document.getElementById('captcha-answer');
+  const refreshBtn = document.getElementById('captcha-refresh');
+  const hp = form.querySelector('input[name="website"]'); // Honeypot
+
+  function rand(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+  function newCaptcha(){
+    const ops = ['+','−','×'];
+    let a = rand(1,9), b = rand(1,9), op = ops[rand(0, ops.length-1)], res;
+    if(op === '−'){ if(b>a) [a,b] = [b,a]; res = a - b; }
+    else if(op === '×'){ res = a * b; }
+    else { res = a + b; }
+    qEl.textContent = `Anti-Spam: Wieviel ist ${a} ${op} ${b}?`;
+    form.dataset.expected = String(res);   // erwartetes Ergebnis merken
+    aEl.value = '';
+  }
+
+  newCaptcha();
+  refreshBtn && refreshBtn.addEventListener('click', newCaptcha);
+
+  form.addEventListener('submit', function(e){
+    // Honeypot gefüllt? → Bot
+    if(hp && hp.value.trim() !== ''){
+      e.preventDefault();
+      return;
+    }
+    // minimale „Lesezeit“ 2s
+    if(Date.now() - start < 2000){
+      e.preventDefault();
+      alert('Bitte einen kurzen Moment warten und dann erneut senden.');
+      return;
+    }
+    // Captcha prüfen
+    const expected = form.dataset.expected || '';
+    if((aEl.value || '').trim() !== expected){
+      e.preventDefault();
+      alert('Anti-Spam: Bitte die Rechenaufgabe korrekt lösen.');
+      aEl && aEl.focus();
+      return;
+    }
+  });
+})();
   </script>
 </body>
 </html>
