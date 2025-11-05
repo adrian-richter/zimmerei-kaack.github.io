@@ -198,14 +198,28 @@
 <form class="form" id="contact-form"
       action="https://formsubmit.co/info@zimmerei-kaack.de"
       method="POST" novalidate>
+
+  <!-- FormSubmit -->
+  <input type="hidden" name="_next" value="https://zimmerei-kaack.de/danke.html">
+  <input type="hidden" name="_subject" value="Neue Anfrage über zimmerei-kaack.de">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_captcha" value="false"><!-- wir nutzen eigenes Captcha -->
+
+  <!-- Honeypot (unsichtbar) -->
+  <input type="text" name="website" tabindex="-1" autocomplete="off"
+         style="position:absolute; left:-10000px; opacity:0; width:1px; height:1px; overflow:hidden;">
+
+  <!-- Zeitstempel (per JS gefüllt) -->
+  <input type="hidden" name="_ts" id="form-ts">
+
   <div class="row two">
     <label>
       <span>Name</span>
-      <input type="text" name="name" placeholder="Ihr Name" required />
+      <input type="text" name="name" placeholder="Ihr Name" required>
     </label>
     <label>
       <span>E-Mail</span>
-      <input type="email" name="email" placeholder="name@mail.de" required />
+      <input type="email" name="email" placeholder="name@mail.de" required>
     </label>
   </div>
 
@@ -214,28 +228,26 @@
     <textarea name="message" placeholder="Worum geht es?" required></textarea>
   </label>
 
+  <!-- DYNAMISCHES CAPTCHA -->
+  <label>
+    <span id="captcha-question" style="display:block;margin-bottom:.35rem;">Anti-Spam: …</span>
+    <div style="display:flex; gap:.5rem; align-items:center;">
+      <input type="number" id="captcha-answer" inputmode="numeric" placeholder="Ergebnis" required style="max-width:160px;">
+      <button type="button" id="captcha-refresh" class="btn" style="border:1px solid rgba(0,0,0,.12); background:#fff;">Neu</button>
+    </div>
+  </label>
+
   <!-- DSGVO -->
   <label style="display:flex; gap:.5rem; align-items:center; font-size:.9rem;">
-    <input type="checkbox" name="privacy" required />
+    <input type="checkbox" name="privacy" required>
     <span>Ich stimme zu, dass meine Angaben zur Kontaktaufnahme gespeichert werden.</span>
   </label>
 
-  <!-- Honeypot (Spamschutz) -->
-  <input type="text" name="website" tabindex="-1" autocomplete="off"
-         style="position:absolute; left:-10000px;" />
-
-  <!-- Optional: Betreff -->
-  <input type="hidden" name="_subject" value="Neue Anfrage über zimmerei-kaack.de" />
-
-    <input type="hidden" name="_next" value="https://zimmerei-kaack.de/danke.html">
   <button class="btn" style="background:var(--brand-accent); color:#fff; box-shadow: var(--shadow-sm)" type="submit">
     Senden
   </button>
 
   <div class="note" id="form-note">Hinweis: Wir melden uns schnellstmöglich.</div>
-
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_template" value="table">
 </form>
       </div>
     </div>
