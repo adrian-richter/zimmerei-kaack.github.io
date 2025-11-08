@@ -317,3 +317,9 @@ footer{ border-top:1px solid rgba(0,0,0,.06); padding: 2rem 0; background:#fff; 
   .nav.solid a{ color: var(--brand-dark) !important; }
 }
 
+/* Captcha Style */
+.g-recaptcha {
+  margin-top: 1rem;
+  transform: scale(0.95);
+  transform-origin: left;
+}
