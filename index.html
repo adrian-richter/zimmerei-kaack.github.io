@@ -267,6 +267,38 @@
       </div>
     </div>
   </footer>
+	
+  <!-- Captcha Logik -->
+  <script>
+    (function() {
+      var form = document.getElementById('contact-form');
+      if (!form) return;
+
+      // Zufällige Zahlen generieren
+      var a = Math.floor(Math.random() * 8) + 2; // 2-9
+      var b = Math.floor(Math.random() * 8) + 1; // 1-8
+      var solution = a + b;
+
+      var spanA = document.getElementById('captcha-a');
+      var spanB = document.getElementById('captcha-b');
+      var input = document.getElementById('captcha-input');
+
+      if (spanA && spanB) {
+        spanA.textContent = a;
+        spanB.textContent = b;
+      }
+
+      form.addEventListener('submit', function(e) {
+        if (!input) return;
+        var value = parseInt(input.value, 10);
+        if (isNaN(value) || value !== solution) {
+          e.preventDefault();
+          alert('Bitte beantworten Sie die Sicherheitsfrage korrekt.');
+          input.focus();
+        }
+      });
+    })();
+  </script>
 
 	<!-- COOKIE BAR -->
 <div class="cookie-banner" role="region" aria-label="Cookie-Hinweis" id="cookieBanner">
