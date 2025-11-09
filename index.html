@@ -8,7 +8,7 @@
   	<link rel="stylesheet" href="styles.css">
 	<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 	<link rel="stylesheet" href="cookiebar.css">
-	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 
 <body>
@@ -223,23 +223,34 @@
     <span>Ich stimme zu, dass meine Angaben zur Kontaktaufnahme gespeichert werden.</span>
   </label>
 
-  <!-- Honeypot (Spamschutz) -->
+  <!-- Honeypot (Spamschutz für Bots) -->
   <input type="text" name="website" tabindex="-1" autocomplete="off"
          style="position:absolute; left:-10000px;" />
 
   <!-- Optional: Betreff -->
   <input type="hidden" name="_subject" value="Neue Anfrage über zimmerei-kaack.de" />
-    <input type="hidden" name="_next" value="https://zimmerei-kaack.de/danke.html">
-	<div class="g-recaptcha" data-sitekey="6LdShAYsAAAAADk4vAhi2MXUPP0tDN7QSWxupZfo"></div>
+  <input type="hidden" name="_next" value="https://zimmerei-kaack.de/danke.html">
+
+  <!-- Einfache Sicherheitsfrage (Captcha) -->
+  <div class="captcha-row">
+    <label for="captcha-input">
+      Sicherheitsfrage: Bitte geben Sie die Summe aus
+      <span id="captcha-a"></span> + <span id="captcha-b"></span> ein.
+    </label>
+    <input type="number" id="captcha-input" name="captcha" inputmode="numeric" required />
+  </div>
+
   <button class="btn" style="background:var(--brand-accent); color:#fff; box-shadow: var(--shadow-sm)" type="submit">
     Senden
   </button>
 
   <div class="note" id="form-note">Hinweis: Wir melden uns schnellstmöglich.</div>
 
-  <input type="hidden" name="_captcha" value="false">
+  <!-- Einstellungen für FormSubmit -->
+  <input type="hidden" name="_captcha" value="true">
   <input type="hidden" name="_template" value="table">
 </form>
+
 
       </div>
     </div>
