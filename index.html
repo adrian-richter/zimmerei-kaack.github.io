@@ -601,6 +601,68 @@ $btnRejAll.addEventListener('click', function(){ saveConsent({ analytics:false, 
 $backdrop.addEventListener('click', closeModal);
 })();
 
+  (function(){
+    // === Modal Logik ===
+    const overlay = document.getElementById('modalOverlay');
+    const triggers = document.querySelectorAll('.open-modal[data-modal]');
+    const closeButtons = '[data-close]';
+
+    function openModal(id){
+      const modal = document.getElementById(id);
+      if(!modal) return;
+      overlay.hidden = false;
+      requestAnimationFrame(()=> overlay.classList.add('show'));
+      modal.hidden = false;
+      document.body.classList.add('modal-open');
+      // Fokus in Modal setzen (Titel oder Close)
+      const focusTarget = modal.querySelector('h3, .modal-close') || modal;
+      focusTarget.focus?.();
+    }
+
+    function closeAll(){
+      document.querySelectorAll('.modal:not([hidden])').forEach(m => m.hidden = true);
+      overlay.classList.remove('show');
+      setTimeout(()=> overlay.hidden = true, 180);
+      document.body.classList.remove('modal-open');
+    }
+
+    triggers.forEach(el=>{
+      el.addEventListener('click', ()=> openModal(el.dataset.modal));
+      el.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault(); openModal(el.dataset.modal);
+        }
+      });
+    });
+
+    document.addEventListener('click', (e)=>{
+      // Schließen über "X"
+      if(e.target.closest(closeButtons)){ closeAll(); }
+      // Klick ausserhalb (auf Overlay)
+      if(e.target === overlay){ closeAll(); }
+    });
+
+    // ESC schließt
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape'){ closeAll(); }
+    });
+
+    // === Hinweis-Badge ===
+    const badge = document.getElementById('statusBadge');
+    const pop = document.getElementById('statusPopover');
+    if(badge && pop){
+      let visible = false;
+      function toggle(){
+        visible = !visible;
+        pop.hidden = !visible;
+      }
+      badge.addEventListener('click', toggle);
+      // optional: nach 6 Sek. automatisch zeigen und wieder aus
+      setTimeout(()=>{ pop.hidden = false; visible = true; }, 600);
+      setTimeout(()=>{ pop.hidden = true; visible = false; }, 5200);
+    }
+  })();
+
   </script>
 </body>
 </html>
