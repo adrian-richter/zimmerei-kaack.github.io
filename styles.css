@@ -432,3 +432,50 @@ body.modal-open{ overflow: hidden; }
 /* sicherstellen, dass .hero parent relativ ist */
 .hero{ position: relative; }
 
+
+
+
+/* ============================================
+   ZENTRIERTER INFO-BUTTON IM HERO-BEREICH
+============================================ */
+.status-wrapper {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1.4rem;
+}
+
+.video-badge {
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: rgba(255,255,255,0.92);
+  color: var(--brand-dark);
+  font-weight: 900;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.badge-popover {
+  margin-top: .65rem;
+  background: rgba(255,255,255,.96);
+  padding: .6rem .9rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  color: var(--brand-dark);
+  display: inline-block;
+  max-width: 85%;
+  font-size: .9rem;
+  text-align: center;
+}
+
+.badge-popover[hidden] {
+  display: none;
+}
