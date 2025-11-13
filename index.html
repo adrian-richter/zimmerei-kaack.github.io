@@ -49,6 +49,13 @@
       </div>
     </div>
   </section>
+	<button class="video-badge" id="statusBadge" type="button" title="Diese Website befindet sich noch im Umbau">
+  i
+</button>
+<div class="badge-popover" id="statusPopover" hidden>
+  Diese Website befindet sich noch im Umbau
+</div>
+
 
   <!-- INTRO -->
   <section class="bg-light">
@@ -78,7 +85,7 @@
       </div>
 
       <div class="grid cols-3">
-        <article class="card">
+        <article class="card open-modal" data-modal="modal-dachsanierung" tabindex="0">
           <div class="media">
             <img alt="Energetische Dachsanierung" src="assets/image001.png">
           </div>
@@ -88,7 +95,7 @@
             <small></small>
           </div>
         </article>
-        <article class="card">
+        <article class="card open-modal" data-modal="modal-pv" tabindex="0">
           <div class="media">
 			<img alt="Photovoltaikanlagen" src="assets/image002.png">
           </div>
@@ -98,7 +105,7 @@
             <small></small>
           </div>
         </article>
-        <article class="card">
+        <article class="card open-modal" data-modal="modal-carports" tabindex="0">
           <div class="media">
 			<img alt="Carports & Terrassenüberdachungen" src="assets/image003.png">         
 			</div>
@@ -108,7 +115,7 @@
             <small></small>
           </div>
         </article>
-        <article class="card">
+        <article class="card open-modal" data-modal="modal-holzbau" tabindex="0">
           <div class="media">
             <img alt="Zimmerer- & Holzbauarbeiten" src="assets/image004.png">  
             </div>
@@ -118,7 +125,7 @@
             <small></small>
           </div>
         </article>
-        <article class="card">
+        <article class="card open-modal" data-modal="modal-innenausbau" tabindex="0">
           <div class="media">
             <img alt="Innenausbau & Trockenbau" src="assets/image005.png">  
           </div>
@@ -128,7 +135,7 @@
             <small></small>
           </div>
         </article>
-        <article class="card">
+        <article class="card open-modal" data-modal="modal-dachfenster" tabindex="0">
           <div class="media">
               <img alt="Dachflächenfenster" src="assets/image006.png">  
             </div>
@@ -366,6 +373,103 @@
 
   </div>
 </div>
+	
+<!-- ===== MODAL OVERLAY ===== -->
+<div class="modal-overlay" id="modalOverlay" hidden></div>
+
+<!-- ===== MODALS ===== -->
+<section class="modal" id="modal-dachsanierung" role="dialog" aria-modal="true" aria-labelledby="title-dachsanierung" hidden>
+  <button class="modal-close" data-close aria-label="Schließen">×</button>
+  <header class="modal-head">
+    <h3 id="title-dachsanierung">Energetische Dachsanierung</h3>
+  </header>
+  <div class="modal-body">
+    <div class="modal-text">
+      <p>Sanierung nach aktuellem Energiestandard, inklusive Dämmkonzept, Luftdichtheit und detailgetreuen Anschlüssen. Beratung zu Fördermitteln auf Wunsch.</p>
+    </div>
+    <div class="modal-gallery">
+      <img src="https://picsum.photos/seed/dach1/960/640" alt="Dachsanierung Beispiel 1">
+      <img src="https://picsum.photos/seed/dach2/960/640" alt="Dachsanierung Beispiel 2">
+      <img src="https://picsum.photos/seed/dach3/960/640" alt="Dachsanierung Beispiel 3">
+    </div>
+  </div>
+</section>
+
+<section class="modal" id="modal-pv" role="dialog" aria-modal="true" aria-labelledby="title-pv" hidden>
+  <button class="modal-close" data-close aria-label="Schließen">×</button>
+  <header class="modal-head"><h3 id="title-pv">Photovoltaikanlagen</h3></header>
+  <div class="modal-body">
+    <div class="modal-text">
+      <p>Statische Vorbereitung, Dachintegration, Unterkonstruktion, Kabelwege und Abdichtung – alles aus einer Hand, sauber geplant und umgesetzt.</p>
+    </div>
+    <div class="modal-gallery">
+      <img src="https://picsum.photos/seed/pv1/960/640" alt="PV Beispiel 1">
+      <img src="https://picsum.photos/seed/pv2/960/640" alt="PV Beispiel 2">
+      <img src="https://picsum.photos/seed/pv3/960/640" alt="PV Beispiel 3">
+    </div>
+  </div>
+</section>
+
+<section class="modal" id="modal-carports" role="dialog" aria-modal="true" aria-labelledby="title-carports" hidden>
+  <button class="modal-close" data-close aria-label="Schließen">×</button>
+  <header class="modal-head"><h3 id="title-carports">Carports & Terrassenüberdachungen</h3></header>
+  <div class="modal-body">
+    <div class="modal-text">
+      <p>Individuelle Konstruktionen, langlebige Hölzer und Beschläge, auf Wunsch mit Dachentwässerung, Beleuchtung und Sichtschutzlösungen.</p>
+    </div>
+    <div class="modal-gallery">
+      <img src="https://picsum.photos/seed/car1/960/640" alt="Carport Beispiel 1">
+      <img src="https://picsum.photos/seed/car2/960/640" alt="Carport Beispiel 2">
+      <img src="https://picsum.photos/seed/car3/960/640" alt="Carport Beispiel 3">
+    </div>
+  </div>
+</section>
+
+<section class="modal" id="modal-holzbau" role="dialog" aria-modal="true" aria-labelledby="title-holzbau" hidden>
+  <button class="modal-close" data-close aria-label="Schließen">×</button>
+  <header class="modal-head"><h3 id="title-holzbau">Zimmerer- & Holzbauarbeiten</h3></header>
+  <div class="modal-body">
+    <div class="modal-text">
+      <p>Von der Gaube bis zur Aufstockung: präzise Abbund-Details, kraftschlüssige Verbindungen und saubere Anschlüsse an Bestand.</p>
+    </div>
+    <div class="modal-gallery">
+      <img src="https://picsum.photos/seed/holz1/960/640" alt="Holzbau Beispiel 1">
+      <img src="https://picsum.photos/seed/holz2/960/640" alt="Holzbau Beispiel 2">
+      <img src="https://picsum.photos/seed/holz3/960/640" alt="Holzbau Beispiel 3">
+    </div>
+  </div>
+</section>
+
+<section class="modal" id="modal-innenausbau" role="dialog" aria-modal="true" aria-labelledby="title-innenausbau" hidden>
+  <button class="modal-close" data-close aria-label="Schließen">×</button>
+  <header class="modal-head"><h3 id="title-innenausbau">Innenausbau & Trockenbau</h3></header>
+  <div class="modal-body">
+    <div class="modal-text">
+      <p>Gerade Kanten, saubere Spachtelarbeiten, durchdachte Unterkonstruktionen – vom Dachgeschoss bis zur Raumtrennwand.</p>
+    </div>
+    <div class="modal-gallery">
+      <img src="https://picsum.photos/seed/innen1/960/640" alt="Innenausbau Beispiel 1">
+      <img src="https://picsum.photos/seed/innen2/960/640" alt="Innenausbau Beispiel 2">
+      <img src="https://picsum.photos/seed/innen3/960/640" alt="Innenausbau Beispiel 3">
+    </div>
+  </div>
+</section>
+
+<section class="modal" id="modal-dachfenster" role="dialog" aria-modal="true" aria-labelledby="title-dachfenster" hidden>
+  <button class="modal-close" data-close aria-label="Schließen">×</button>
+  <header class="modal-head"><h3 id="title-dachfenster">Dachflächenfenster</h3></header>
+  <div class="modal-body">
+    <div class="modal-text">
+      <p>Beratung, Lieferung und Montage inkl. Einbaurahmen, Dämm- und Dampfsperrdetails sowie sauberer Innenverkleidung.</p>
+    </div>
+    <div class="modal-gallery">
+      <img src="https://picsum.photos/seed/fenster1/960/640" alt="Dachfenster Beispiel 1">
+      <img src="https://picsum.photos/seed/fenster2/960/640" alt="Dachfenster Beispiel 2">
+      <img src="https://picsum.photos/seed/fenster3/960/640" alt="Dachfenster Beispiel 3">
+    </div>
+  </div>
+</section>
+
 
   <!-- E-Mail -->
   <script>
