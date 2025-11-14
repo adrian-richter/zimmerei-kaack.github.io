@@ -105,9 +105,11 @@ document.getElementById('year').textContent = new Date().getFullYear();
     });
   });
 
+  // Klick auf den grauen Overlay-Bereich schließt das Modal
+  overlay.addEventListener("click", closeAll);
+
   document.addEventListener("click", (e) => {
     if (e.target.closest("[data-close]")) closeAll();
-    if (e.target === overlay) closeAll();
   });
 
   document.addEventListener("keydown", (e) => {

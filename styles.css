@@ -479,3 +479,56 @@ body.modal-open{ overflow: hidden; }
 .badge-popover[hidden] {
   display: none;
 }
+
+
+
+/* ============================================
+   ZENTRIERTER INFO-BUTTON IM HERO-BEREICH
+   (Override Version)
+============================================ */
+.status-wrapper {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2.2rem;
+}
+
+.video-badge {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: rgba(255,255,255,0.92);
+  color: var(--brand-dark);
+  font-weight: 900;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.badge-popover {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  margin-top: .65rem;
+  background: rgba(255,255,255,.96);
+  padding: .6rem .9rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  color: var(--brand-dark);
+  display: inline-block;
+  max-width: 85%;
+  font-size: .9rem;
+  text-align: center;
+}
+
+.badge-popover[hidden] {
+  display: none;
+}
