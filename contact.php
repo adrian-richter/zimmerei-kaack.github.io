@@ -1,8 +1,4 @@
 <?php
-// contact.php — schlanke PHP-Mail für Zimmerei Kaack
-// Leg diese Datei neben index.html.
-// Hinweis: Für zuverlässigen Versand richte SPF/DMARC für die Absenderdomain ein
-// und nutze idealerweise SMTP (PHPMailer). Diese Version verwendet PHP mail().
 
 header('Content-Type: application/json; charset=utf-8');
 
