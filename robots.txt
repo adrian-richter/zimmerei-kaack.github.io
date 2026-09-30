@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
+Disallow: /danke.html
+
 Sitemap: https://www.zimmerei-kaack.de/sitemap.xml
